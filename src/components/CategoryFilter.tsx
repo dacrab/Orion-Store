@@ -36,7 +36,7 @@ export const CategoryFilter = memo(function CategoryFilter({ platform }: Categor
       <div id="category-dropdown" className="relative flex-1 md:flex-none md:w-64">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex justify-between items-center py-3 px-4 bg-card border border-theme-border rounded-2xl font-bold text-theme-text shadow-sm hover:shadow-lg transition-all"
+          className="w-full flex justify-between items-center py-3 px-4 bg-card border border-theme-border rounded-2xl font-bold text-theme-text shadow-xs hover:shadow-lg transition-all"
         >
           {selectedCategory}
           <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'} text-xs transition-transform`} />
@@ -72,7 +72,7 @@ export const CategoryFilter = memo(function CategoryFilter({ platform }: Categor
 
       <button
         onClick={refresh}
-        className={`shrink-0 w-12 h-12 rounded-2xl border border-theme-border bg-card flex items-center justify-center text-theme-sub hover:text-primary hover:border-primary transition-all shadow-sm active:scale-95 ${
+        className={`shrink-0 w-12 h-12 rounded-2xl border border-theme-border bg-card flex items-center justify-center text-theme-sub hover:text-primary hover:border-primary transition-all shadow-xs active:scale-95 ${
           isRefreshing ? 'animate-spin text-primary' : ''
         }`}
         title="Refresh Data"

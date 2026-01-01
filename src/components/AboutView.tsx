@@ -284,7 +284,7 @@ export const AboutView = memo(function AboutView() {
               <span className="opacity-60 font-mono">v{CURRENT_STORE_VERSION}</span>
               <span className="w-1 h-1 rounded-full bg-theme-border" />
               <div
-                className={`px-3 py-1 rounded-full border text-xs font-bold flex items-center gap-2 shadow-sm ${
+                className={`px-3 py-1 rounded-full border text-xs font-bold flex items-center gap-2 shadow-xs ${
                   useRemoteJson
                     ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400'
                     : 'bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400'

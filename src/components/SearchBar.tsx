@@ -20,7 +20,7 @@ export const SearchBar = memo(function SearchBar({ placeholder }: SearchBarProps
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-theme-text placeholder-gray-500 h-12 font-medium text-lg"
+          className="w-full bg-transparent border-none outline-none text-theme-text placeholder-gray-500 h-12 font-medium text-lg"
         />
         {searchQuery && (
           <button
