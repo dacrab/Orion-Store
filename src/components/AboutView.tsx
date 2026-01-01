@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useState, useRef } from 'react';
 import { useStore, useSocialLinks, useDevProfile, useEasterEggUrl } from '@/store';
 import { storage } from '@/utils/storage';
 import { CURRENT_STORE_VERSION } from '@/constants';
@@ -13,6 +13,7 @@ export const AboutView = memo(function AboutView() {
   const [profileImgError, setProfileImgError] = useState(false);
   const [isEditingToken, setIsEditingToken] = useState(false);
   const [easterEggCount, setEasterEggCount] = useState(0);
+  const tokenInputRef = useRef<HTMLInputElement>(null);
 
   const handleProfileClick = () => {
     const newCount = easterEggCount + 1;
@@ -123,8 +124,8 @@ export const AboutView = memo(function AboutView() {
                   <p className="text-[10px] text-theme-sub leading-tight">Bypass rate limits (5000 req/hr vs 60 req/hr).</p>
                   {isEditingToken ? (
                     <div className="flex gap-2 mt-1">
-                      <input type="password" placeholder="ghp_xxxxxxxxxxxx" className="flex-1 bg-theme-input border border-theme-border rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" onKeyDown={(e) => e.key === 'Enter' && handleTokenSave((e.target as HTMLInputElement).value)} />
-                      <button className="bg-primary text-white px-3 rounded-lg text-xs font-bold" onClick={(e) => handleTokenSave((e.currentTarget.previousElementSibling as HTMLInputElement).value)}>Save</button>
+                      <input ref={tokenInputRef} type="password" placeholder="ghp_xxxxxxxxxxxx" className="flex-1 bg-theme-input border border-theme-border rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" onKeyDown={e => { if (e.key === 'Enter') handleTokenSave(tokenInputRef.current?.value ?? ''); }} />
+                      <button className="bg-primary text-white px-3 rounded-lg text-xs font-bold" onClick={() => handleTokenSave(tokenInputRef.current?.value ?? '')}>Save</button>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">

@@ -132,7 +132,7 @@ export const useStore = create<AppState>()(
             }
           }
 
-          const CACHE_TTL = githubToken ? 600000 : 3600000;
+          const CACHE_TTL = githubToken ? 10 * 60 * 1000 : 60 * 60 * 1000; // 10min with token, 1hr without
           const batches: string[][] = [];
           for (let i = 0; i < toFetch.length; i += 5) batches.push(toFetch.slice(i, i + 5));
 
@@ -177,7 +177,8 @@ export const useStore = create<AppState>()(
                   .map(a => ({ arch: determineArch(a.name), url: a.browser_download_url }))
                   .sort((a, b) => getArchScore(b.arch) - getArchScore(a.arch));
                 const firstAsset = match.assets[0];
-                const size = firstAsset ? `${(firstAsset.size / 1048576).toFixed(1)} MB` : '?';
+                const MB = 1024 * 1024;
+                const size = firstAsset ? `${(firstAsset.size / MB).toFixed(1)} MB` : '?';
                 return { ...app, version: match.ver, latestVersion: match.ver, downloadUrl: variants[0]?.url ?? '#', variants, size };
               }
             }
@@ -269,7 +270,7 @@ export const useStore = create<AppState>()(
   ),
 );
 
-function findRelease(releases: Release[], keyword?: string  ) {
+function findRelease(releases: Release[], keyword?: string) {
   for (const r of releases) {
     const apks = r.assets?.filter(a => a.name.toLowerCase().endsWith('.apk')) ?? [];
     if (apks.length === 0) continue;
