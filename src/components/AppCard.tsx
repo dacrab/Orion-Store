@@ -7,13 +7,15 @@ interface AppCardProps {
   onClick: (app: AppItem | null) => void;
   hasUpdate: boolean;
   localVersion?: string | undefined;
+  index?: number;
 }
 
-export const AppCard = memo(function AppCard({ app, onClick, hasUpdate, localVersion }: AppCardProps) {
+export const AppCard = memo(function AppCard({ app, onClick, hasUpdate, localVersion, index = 0 }: AppCardProps) {
   return (
     <div
       onClick={() => onClick(app)}
-      className="group bg-card border border-theme-border rounded-3xl p-4 cursor-pointer hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] relative overflow-hidden"
+      style={{ '--stagger-index': index } as React.CSSProperties}
+      className="stagger-item group bg-card border border-theme-border rounded-3xl p-4 cursor-pointer hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] relative overflow-hidden"
     >
       {hasUpdate && (
         <div className="absolute top-3 right-3 z-10">

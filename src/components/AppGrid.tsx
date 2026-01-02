@@ -24,13 +24,13 @@ export const AppGrid = memo(function AppGrid() {
     return (
       <div className="flex flex-col items-center justify-center py-24 animate-fade-in">
         <div className="w-12 h-12 border-4 border-theme-element border-t-primary rounded-full animate-spin mb-4" />
-        <p className="text-theme-sub font-bold animate-pulse">Loading Store...</p>
+        <p className="text-theme-sub font-bold animate-pulse-slow">Loading Store...</p>
       </div>
     );
   }
 
   return (
-    <div className="px-6 pt-24 pb-28 space-y-2 animate-fade-in">
+    <div className="px-6 pb-28 space-y-2 animate-fade-in entrance-content">
       {config?.announcement && (
         <div className="bg-indigo-500/10 border border-indigo-500/30 text-indigo-600 dark:text-indigo-300 p-4 rounded-2xl mb-6 flex items-start gap-3">
           <i className="fas fa-bullhorn mt-1" />
@@ -56,13 +56,13 @@ export const AppGrid = memo(function AppGrid() {
 
       {filteredApps.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredApps.map(app => (
-            <AppCard key={app.id} app={app} onClick={setSelectedApp} hasUpdate={checkHasUpdate(app)} localVersion={installedVersions[app.id]} />
+          {filteredApps.map((app, index) => (
+            <AppCard key={app.id} app={app} onClick={setSelectedApp} hasUpdate={checkHasUpdate(app)} localVersion={installedVersions[app.id]} index={index} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-12 text-center opacity-60">
-          <div className="w-20 h-20 bg-theme-element rounded-full flex items-center justify-center mb-4">
+        <div className="flex flex-col items-center justify-center py-12 text-center animate-scale-in">
+          <div className="w-20 h-20 bg-theme-element rounded-full flex items-center justify-center mb-4 animate-float">
             <i className="fas fa-search text-3xl text-theme-sub" />
           </div>
           <h3 className="text-lg font-bold text-theme-text mb-1">No apps found</h3>

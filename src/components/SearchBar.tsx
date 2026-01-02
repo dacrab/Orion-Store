@@ -17,7 +17,7 @@ export const SearchBar = memo(function SearchBar() {
   const placeholder = activeTab === 'pc' ? 'Search PC apps...' : 'Search apps...';
 
   return (
-    <div className="relative mb-6 group z-10 animate-fade-in">
+    <div className="relative mb-6 group z-10 animate-fade-in entrance-search">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-acid via-primary to-neon rounded-2xl opacity-20 group-focus-within:opacity-100 transition duration-500 blur group-focus-within:blur-md" />
       <div className="relative flex items-center bg-theme-input rounded-2xl border border-theme-border p-1 shadow-lg transition-transform group-focus-within:scale-[1.01]">
         <i className="fas fa-search text-lg pl-4 pr-3 text-theme-sub group-focus-within:text-acid transition-colors" />

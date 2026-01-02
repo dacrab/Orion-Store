@@ -6,7 +6,7 @@ import { CACHE_VERSION, REMOTE_CONFIG_URL, DEFAULT_APPS_JSON, DEFAULT_MIRROR_JSO
 import { localAppsData } from '@/data/localData';
 import type { AppItem, AppVariant, StoreConfig, Tab } from '@/types';
 
-type Theme = 'light' | 'dusk' | 'dark';
+type Theme = 'light' | 'dusk' | 'system';
 
 interface Release {
   name?: string | undefined;
@@ -68,15 +68,20 @@ const getInitialApps = (): AppItem[] => {
 export const useStore = create<AppState>()(
   persist(
     (set, get) => ({
-      theme: 'light',
+      theme: 'system',
       setTheme: theme => {
-        document.documentElement.classList.remove('light', 'dusk', 'dark');
-        document.documentElement.classList.add(theme);
+        document.documentElement.classList.remove('light', 'dusk');
+        if (theme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.add(prefersDark ? 'dusk' : 'light');
+        } else {
+          document.documentElement.classList.add(theme);
+        }
         set({ theme });
       },
       cycleTheme: () => {
         const t = get().theme;
-        get().setTheme(t === 'light' ? 'dusk' : t === 'dusk' ? 'dark' : 'light');
+        get().setTheme(t === 'light' ? 'dusk' : t === 'dusk' ? 'system' : 'light');
       },
 
       activeTab: 'android',
@@ -301,7 +306,15 @@ export const useSupportEmail = () => useStore(s => s.config?.supportEmail ?? DEF
 export const useEasterEggUrl = () => useStore(s => s.config?.easterEggUrl ?? DEFAULT_EASTER_EGG);
 
 if (typeof window !== 'undefined') {
-  const theme = useStore.getState().theme;
-  document.documentElement.classList.add(theme);
+  const { theme, setTheme } = useStore.getState();
+  setTheme(theme); // Apply theme on load (handles system preference)
+  
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (useStore.getState().theme === 'system') {
+      useStore.getState().setTheme('system');
+    }
+  });
+  
   void useStore.getState().loadApps();
 }

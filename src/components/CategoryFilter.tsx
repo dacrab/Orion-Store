@@ -20,7 +20,7 @@ export const CategoryFilter = memo(function CategoryFilter() {
   }, [isOpen]);
 
   return (
-    <div className="relative z-10 mb-6 animate-fade-in flex items-center gap-3">
+    <div className="relative z-10 mb-6 animate-fade-in entrance-filter flex items-center gap-3">
       <span className="text-sm font-bold text-theme-sub uppercase tracking-wider hidden md:block">Category:</span>
       <div id="category-dropdown" className="relative flex-1 md:flex-none md:w-64">
         <button onClick={() => setIsOpen(!isOpen)} className="w-full flex justify-between items-center py-3 px-4 bg-card border border-theme-border rounded-2xl font-bold text-theme-text shadow-xs hover:shadow-lg transition-all">

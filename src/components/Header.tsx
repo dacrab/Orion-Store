@@ -12,9 +12,9 @@ export const Header = memo(function Header() {
   const downloadUrl = config?.storeDownloadUrl;
 
   return (
-    <header className="absolute top-0 left-0 w-full z-20 px-6 py-6 flex justify-between items-center">
+    <header className="absolute top-0 left-0 w-full z-20 px-6 py-6 flex justify-between items-center animate-fade-in entrance-header">
       <div className="flex items-center gap-3 select-none">
-        <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 transform rotate-3">
+        <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 transform rotate-3 animate-float">
           <i className="fas fa-shapes text-lg" />
         </div>
         <h1 onClick={handleDevTap} className="text-2xl font-black tracking-tighter text-theme-text cursor-pointer active:scale-95 transition-transform">
@@ -37,7 +37,7 @@ export const Header = memo(function Header() {
           className="w-10 h-10 rounded-full bg-theme-element hover:bg-theme-hover flex items-center justify-center text-theme-sub hover:text-acid transition-all hover:scale-110 active:scale-95"
           title={`Theme: ${theme}`}
         >
-          <i className={`fas ${theme === 'light' ? 'fa-sun' : theme === 'dusk' ? 'fa-cloud-sun' : 'fa-moon'}`} />
+          <i className={`fas ${theme === 'light' ? 'fa-sun' : theme === 'dusk' ? 'fa-moon' : 'fa-circle-half-stroke'}`} />
         </button>
       </div>
     </header>

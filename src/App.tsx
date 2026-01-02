@@ -12,10 +12,10 @@ export default function App() {
     <div className={`min-h-screen bg-bg text-text transition-colors ${theme}`}>
       <Header />
       {activeTab !== 'about' && (
-        <>
+        <div className="px-6 pt-24">
           <SearchBar />
           <CategoryFilter />
-        </>
+        </div>
       )}
       <main className="pb-24">
         {activeTab === 'about' ? <AboutView /> : <AppGrid />}

@@ -17,10 +17,10 @@ export const BottomNav = memo(function BottomNav() {
         <button
           key={id}
           onClick={() => setActiveTab(id)}
-          className={`px-6 py-3 rounded-[1.5rem] font-bold transition-all duration-300 flex items-center gap-2 ${activeTab === id ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105' : 'text-theme-sub hover:bg-theme-element'}`}
+          className={`px-6 py-3 rounded-[1.5rem] font-bold transition-all duration-300 flex items-center gap-2 ${activeTab === id ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105' : 'text-theme-sub hover:bg-theme-element hover:scale-[1.02]'}`}
         >
-          <i className={`${icon} text-lg`} />
-          {activeTab === id && <span className="animate-fade-in text-sm">{label}</span>}
+          <i className={`${icon} text-lg transition-transform duration-300 ${activeTab === id ? 'scale-110' : ''}`} />
+          {activeTab === id && <span className="animate-scale-in text-sm">{label}</span>}
         </button>
       ))}
     </nav>
