@@ -1,13 +1,12 @@
 import { memo, useState, useEffect } from 'react';
 import { useStore } from '@/store';
-import { DEBOUNCE_MS } from '@/constants';
 
 export const SearchBar = memo(function SearchBar() {
   const { searchQuery, setSearchQuery, activeTab, isRefreshing, loadApps } = useStore();
   const [local, setLocal] = useState(searchQuery);
 
   useEffect(() => {
-    const t = setTimeout(() => setSearchQuery(local), DEBOUNCE_MS);
+    const t = setTimeout(() => setSearchQuery(local), 200);
     return () => clearTimeout(t);
   }, [local, setSearchQuery]);
 

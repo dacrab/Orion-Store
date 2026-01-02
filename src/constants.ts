@@ -4,19 +4,10 @@ import type { AppCategory, DevProfile, FAQItem, SocialLinks } from './types';
 export const CURRENT_STORE_VERSION = '1.1.0';
 export const CACHE_VERSION = 'v1_3';
 export const NETWORK_TIMEOUT_MS = 8000;
-
-// Timing Constants
-export const CACHE_TTL_WITH_TOKEN = 10 * 60 * 1000; // 10 minutes
-export const CACHE_TTL_DEFAULT = 60 * 60 * 1000; // 1 hour
-export const DEBOUNCE_MS = 200;
-export const TOAST_DURATION_MS = 2000;
-export const TOKEN_RELOAD_DELAY_MS = 500;
-export const SCROLL_THRESHOLD = 300;
 export const API_BATCH_SIZE = 5;
 
 // Easter Egg / Dev Mode
 export const DEV_TAP_TARGET = 9;
-export const DEV_TAP_HINT_THRESHOLD = 5;
 export const EASTER_EGG_TAP_TARGET = 8;
 
 // Remote URLs

@@ -1,11 +1,10 @@
 import { memo, useState, useEffect } from 'react';
-import { SCROLL_THRESHOLD } from '@/constants';
 
 export const ScrollToTop = memo(function ScrollToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > SCROLL_THRESHOLD);
+    const onScroll = () => setVisible(window.scrollY > 300);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
