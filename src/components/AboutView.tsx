@@ -1,10 +1,17 @@
-import { memo, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useStore, useSocialLinks, useDevProfile, useEasterEggUrl } from '@/store';
 import { storage } from '@/utils/storage';
-import { CURRENT_STORE_VERSION, EASTER_EGG_TAP_TARGET } from '@/constants';
-import { SectionDivider } from './SectionDivider';
+import { CURRENT_STORE_VERSION } from '@/constants';
 
-export const AboutView = memo(function AboutView() {
+const Divider = ({ label }: { label: string }) => (
+  <div className="flex items-center gap-2 px-2">
+    <div className="h-px bg-theme-border flex-1" />
+    <span className="text-xs font-bold text-theme-sub uppercase tracking-widest">{label}</span>
+    <div className="h-px bg-theme-border flex-1" />
+  </div>
+);
+
+export function AboutView() {
   const { isDevUnlocked, useRemoteJson, toggleSourceMode, githubToken, setGithubToken, setShowFAQ, isLegend, setIsLegend } = useStore();
   const socialLinks = useSocialLinks();
   const devProfile = useDevProfile();
@@ -18,7 +25,7 @@ export const AboutView = memo(function AboutView() {
   const handleProfileClick = () => {
     const newCount = easterEggCount + 1;
     setEasterEggCount(newCount);
-    if (newCount >= EASTER_EGG_TAP_TARGET) {
+    if (newCount >= 8) {
       window.open(easterEggUrl, '_blank');
       setEasterEggCount(0);
       setIsLegend(true);
@@ -57,7 +64,7 @@ export const AboutView = memo(function AboutView() {
 
         <div className="w-full max-w-md space-y-6">
           <div className="space-y-3">
-            <SectionDivider label="Connect" />
+            <Divider label="Connect" />
             <div className="grid grid-cols-2 gap-3">
               <a href={socialLinks.github} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 p-4 bg-card border border-theme-border rounded-2xl hover:scale-[1.02] transition-all">
                 <i className="fab fa-github text-2xl text-theme-text" />
@@ -79,7 +86,7 @@ export const AboutView = memo(function AboutView() {
           </div>
 
           <div className="space-y-3">
-            <SectionDivider label="Resources" />
+            <Divider label="Resources" />
             <a href={socialLinks.coffee} target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 bg-yellow-50 dusk:bg-yellow-900/20 border-2 border-yellow-400 rounded-2xl hover:scale-[1.01] transition-all shadow-lg shadow-yellow-400/20">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-yellow-400 text-yellow-900 flex items-center justify-center text-xl"><i className="fas fa-coffee" /></div>
@@ -104,7 +111,7 @@ export const AboutView = memo(function AboutView() {
 
           {isDevUnlocked && (
             <div className="flex flex-col items-center gap-3 mt-8 w-full animate-fade-in">
-              <SectionDivider label="Developer Options" />
+              <Divider label="Developer Options" />
               <div className="flex flex-col gap-3 w-full p-4 bg-card border border-theme-border rounded-2xl shadow-lg shadow-primary/5">
                 <div className="flex items-center justify-between">
                   <div className="text-left">
@@ -159,4 +166,4 @@ export const AboutView = memo(function AboutView() {
       </div>
     </div>
   );
-});
+}

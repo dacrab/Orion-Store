@@ -1,6 +1,6 @@
-import { memo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export const ScrollToTop = memo(function ScrollToTop() {
+export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ export const ScrollToTop = memo(function ScrollToTop() {
       <i className="fas fa-arrow-up" />
     </button>
   );
-});
+}

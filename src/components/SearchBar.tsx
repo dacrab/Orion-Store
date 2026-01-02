@@ -1,7 +1,7 @@
-import { memo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '@/store';
 
-export const SearchBar = memo(function SearchBar() {
+export function SearchBar() {
   const { searchQuery, setSearchQuery, activeTab, isRefreshing, loadApps } = useStore();
   const [local, setLocal] = useState(searchQuery);
 
@@ -43,4 +43,4 @@ export const SearchBar = memo(function SearchBar() {
       </button>
     </div>
   );
-});
+}

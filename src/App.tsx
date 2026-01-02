@@ -1,5 +1,14 @@
 import { useStore, useTheme, useConfig } from '@/store';
-import { Header, SearchBar, CategoryFilter, AppGrid, AppDetail, BottomNav, Toast, ScrollToTop, FAQModal, AboutView } from '@/components';
+import { Header } from '@/components/Header';
+import { SearchBar } from '@/components/SearchBar';
+import { CategoryFilter } from '@/components/CategoryFilter';
+import { AppGrid } from '@/components/AppGrid';
+import { AppDetail } from '@/components/AppDetail';
+import { BottomNav } from '@/components/BottomNav';
+import { Toast } from '@/components/Toast';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { FAQModal } from '@/components/FAQModal';
+import { AboutView } from '@/components/AboutView';
 
 export default function App() {
   const { activeTab, selectedApp, setSelectedApp, showFAQ, setShowFAQ, devToast, isLoading, isRefreshing } = useStore();

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { useStore, useSupportEmail } from '@/store';
 import { AppIcon } from './AppIcon';
 import type { AppItem } from '@/types';
@@ -8,7 +8,7 @@ interface AppDetailProps {
   onClose: () => void;
 }
 
-export const AppDetail = memo(function AppDetail({ app, onClose }: AppDetailProps) {
+export function AppDetail({ app, onClose }: AppDetailProps) {
   const { handleDownload, checkHasUpdate, installedVersions } = useStore();
   const supportEmail = useSupportEmail();
   const [showVariants, setShowVariants] = useState(false);
@@ -113,4 +113,4 @@ export const AppDetail = memo(function AppDetail({ app, onClose }: AppDetailProp
       </div>
     </div>
   );
-});
+}

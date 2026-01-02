@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { storage, STORAGE_KEYS } from '@/utils/storage';
-import { fetchWithTimeout, sanitizeApp, determineArch, cleanGithubRepo, getArchScore, hasUpdate, sanitizeUrl } from '@/utils';
-import { CACHE_VERSION, REMOTE_CONFIG_URL, DEFAULT_APPS_JSON, DEFAULT_MIRROR_JSON, DEV_SOCIALS, DEFAULT_FAQS, DEFAULT_DEV_PROFILE, DEFAULT_SUPPORT_EMAIL, DEFAULT_EASTER_EGG, API_BATCH_SIZE, DEV_TAP_TARGET, EASTER_EGG_TAP_TARGET } from '@/constants';
+import { storage } from '@/utils/storage';
+import { fetchWithTimeout } from '@/utils/fetch';
+import { sanitizeApp, determineArch, cleanGithubRepo, getArchScore, sanitizeUrl, hasUpdate } from '@/utils/sanitize';
+import { CACHE_VERSION, REMOTE_CONFIG_URL, DEFAULT_APPS_JSON, DEFAULT_MIRROR_JSON, DEV_SOCIALS, DEFAULT_FAQS, DEFAULT_DEV_PROFILE, DEFAULT_SUPPORT_EMAIL, DEFAULT_EASTER_EGG } from '@/constants';
 import { localAppsData } from '@/data/localData';
 import type { AppItem, AppVariant, StoreConfig, Tab } from '@/types';
 
@@ -57,9 +58,9 @@ interface AppState {
 }
 
 const getInitialApps = (): AppItem[] => {
-  if (storage.get(STORAGE_KEYS.CACHE_VERSION) !== CACHE_VERSION) return localAppsData.map(sanitizeApp);
+  if (storage.getCacheVersion() !== CACHE_VERSION) return localAppsData.map(sanitizeApp);
   try {
-    const cached = storage.get(STORAGE_KEYS.CACHED_APPS);
+    const cached = storage.getCachedApps();
     const parsed: unknown = cached ? JSON.parse(cached) : [];
     return Array.isArray(parsed) ? (parsed as Partial<AppItem>[]).map(sanitizeApp) : localAppsData.map(sanitizeApp);
   } catch { return localAppsData.map(sanitizeApp); }
@@ -139,7 +140,7 @@ export const useStore = create<AppState>()(
 
           const CACHE_TTL = githubToken ? 10 * 60 * 1000 : 60 * 60 * 1000;
           const batches: string[][] = [];
-          for (let i = 0; i < toFetch.length; i += API_BATCH_SIZE) batches.push(toFetch.slice(i, i + API_BATCH_SIZE));
+          for (let i = 0; i < toFetch.length; i += 5) batches.push(toFetch.slice(i, i + 5));
 
           for (const batch of batches) {
             await Promise.all(batch.map(async repo => {
@@ -195,8 +196,8 @@ export const useStore = create<AppState>()(
           });
 
           set({ apps: processed });
-          storage.set(STORAGE_KEYS.CACHED_APPS, JSON.stringify(processed));
-          storage.set(STORAGE_KEYS.CACHE_VERSION, CACHE_VERSION);
+          storage.setCachedApps(JSON.stringify(processed));
+          storage.setCacheVersion(CACHE_VERSION);
         } catch (e) { console.error('Load error:', e); }
         finally { set({ isLoading: false, isRefreshing: false }); }
       },
@@ -227,7 +228,7 @@ export const useStore = create<AppState>()(
 
         const count = devTapCount + 1;
         set({ devTapCount: count });
-        const left = DEV_TAP_TARGET - count;
+        const left = 9 - count;
 
         if (left <= 0) {
           set({ isDevUnlocked: true });

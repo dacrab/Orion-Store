@@ -1,9 +1,8 @@
-import { memo } from 'react';
 import { useStore, useTheme, useConfig } from '@/store';
-import { compareVersions } from '@/utils';
+import { compareVersions } from '@/utils/sanitize';
 import { CURRENT_STORE_VERSION } from '@/constants';
 
-export const Header = memo(function Header() {
+export function Header() {
   const theme = useTheme();
   const config = useConfig();
   const { activeTab, setActiveTab, cycleTheme, handleDevTap } = useStore();
@@ -53,4 +52,4 @@ export const Header = memo(function Header() {
       </div>
     </header>
   );
-});
+}

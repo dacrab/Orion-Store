@@ -1,7 +1,7 @@
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useStore, useApps } from '@/store';
 
-export const CategoryFilter = memo(function CategoryFilter() {
+export function CategoryFilter() {
   const apps = useApps();
   const { activeTab, selectedCategory, setSelectedCategory } = useStore();
 
@@ -28,4 +28,4 @@ export const CategoryFilter = memo(function CategoryFilter() {
       ))}
     </div>
   );
-});
+}

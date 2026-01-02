@@ -1,7 +1,6 @@
-import { memo } from 'react';
 import { useFaqs } from '@/store';
 
-export const FAQModal = memo(function FAQModal({ onClose }: { onClose: () => void }) {
+export function FAQModal({ onClose }: { onClose: () => void }) {
   const items = useFaqs();
 
   return (
@@ -32,4 +31,4 @@ export const FAQModal = memo(function FAQModal({ onClose }: { onClose: () => voi
       </div>
     </div>
   );
-});
+}

@@ -1,30 +1,14 @@
-import type { AppCategory, DevProfile, FAQItem, SocialLinks } from './types';
+import type { DevProfile, FAQItem, SocialLinks } from './types';
 
 // Version & Cache
 export const CURRENT_STORE_VERSION = '1.1.0';
 export const CACHE_VERSION = 'v1_3';
 export const NETWORK_TIMEOUT_MS = 8000;
-export const API_BATCH_SIZE = 5;
-
-// Easter Egg / Dev Mode
-export const DEV_TAP_TARGET = 9;
-export const EASTER_EGG_TAP_TARGET = 8;
 
 // Remote URLs
 export const REMOTE_CONFIG_URL = 'https://raw.githubusercontent.com/RookieEnough/Orion-Data/main/config.json';
 export const DEFAULT_APPS_JSON = 'https://raw.githubusercontent.com/RookieEnough/Orion-Data/main/apps.json';
 export const DEFAULT_MIRROR_JSON = 'https://raw.githubusercontent.com/RookieEnough/Orion-Data/main/mirror.json';
-
-// Category Gradients
-export const CATEGORY_GRADIENTS: Record<AppCategory | 'Default', string> = {
-  Utility: 'bg-gradient-to-br from-blue-500 to-cyan-400',
-  Privacy: 'bg-gradient-to-br from-emerald-500 to-teal-400',
-  Media: 'bg-gradient-to-br from-fuchsia-500 to-pink-400',
-  Development: 'bg-gradient-to-br from-orange-500 to-amber-400',
-  Social: 'bg-gradient-to-br from-indigo-500 to-violet-400',
-  Educational: 'bg-gradient-to-br from-green-500 to-lime-400',
-  Default: 'bg-gradient-to-br from-gray-500 to-slate-400',
-};
 
 // Default Social Links
 export const DEV_SOCIALS: SocialLinks = {

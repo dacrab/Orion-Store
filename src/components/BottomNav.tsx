@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { useStore } from '@/store';
 import type { Tab } from '@/types';
 
@@ -7,7 +6,7 @@ const tabs: { id: Tab; icon: string; label: string }[] = [
   { id: 'pc', icon: 'fas fa-desktop', label: 'PC' },
 ];
 
-export const BottomNav = memo(function BottomNav() {
+export function BottomNav() {
   const { activeTab, setActiveTab } = useStore();
 
   return (
@@ -28,4 +27,4 @@ export const BottomNav = memo(function BottomNav() {
       ))}
     </nav>
   );
-});
+}
