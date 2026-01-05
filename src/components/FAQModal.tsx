@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useFaqs } from '@/store';
 
 export function FAQModal({ onClose }: { onClose: () => void }) {
+  const { t } = useTranslation();
   const items = useFaqs();
 
   return (
@@ -8,7 +10,7 @@ export function FAQModal({ onClose }: { onClose: () => void }) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div className="relative bg-surface border border-theme-border rounded-3xl w-full max-w-lg max-h-[80vh] overflow-hidden animate-slide-up">
         <div className="sticky top-0 bg-surface/90 backdrop-blur-xl z-10 p-4 flex justify-between items-center border-b border-theme-border">
-          <h2 className="text-xl font-black text-theme-text">FAQs</h2>
+          <h2 className="text-xl font-black text-theme-text">{t('faqModal.title')}</h2>
           <button onClick={onClose} className="w-10 h-10 rounded-full bg-theme-element flex items-center justify-center text-theme-sub hover:text-theme-text transition-colors">
             <i className="fas fa-times" />
           </button>

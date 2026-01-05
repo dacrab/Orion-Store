@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStore, useSocialLinks, useDevProfile, useEasterEggUrl } from '@/store';
 import { storage } from '@/utils/storage';
 import { CURRENT_STORE_VERSION } from '@/constants';
@@ -12,6 +13,7 @@ const Divider = ({ label }: { label: string }) => (
 );
 
 export function AboutView() {
+  const { t } = useTranslation();
   const { isDevUnlocked, useRemoteJson, toggleSourceMode, githubToken, setGithubToken, setShowFAQ, isLegend, setIsLegend } = useStore();
   const socialLinks = useSocialLinks();
   const devProfile = useDevProfile();
@@ -44,7 +46,7 @@ export function AboutView() {
           <div className="absolute -top-4 -right-10 z-50">
             <div className="bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-600 text-yellow-900 px-3 py-1.5 rounded-2xl shadow-[0_0_15px_rgba(250,204,21,0.6)] animate-shine border border-yellow-200 transform rotate-6 flex items-center gap-1 min-w-[70px] justify-center">
               <i className="fas fa-crown text-[8px] animate-bounce" />
-              <span className="text-[9px] font-black tracking-wider uppercase">Legend</span>
+              <span className="text-[9px] font-black tracking-wider uppercase">{t('about.legend')}</span>
             </div>
           </div>
         )}
@@ -64,11 +66,11 @@ export function AboutView() {
 
         <div className="w-full max-w-md space-y-6">
           <div className="space-y-3">
-            <Divider label="Connect" />
+            <Divider label={t('about.connect')} />
             <div className="grid grid-cols-2 gap-3">
               <a href={socialLinks.github} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 p-4 bg-card border border-theme-border rounded-2xl hover:scale-[1.02] transition-all">
                 <i className="fab fa-github text-2xl text-theme-text" />
-                <span className="font-bold text-theme-text">GitHub</span>
+                <span className="font-bold text-theme-text">{t('about.github')}</span>
               </a>
               <a href={socialLinks.x} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 p-4 bg-black dusk:bg-white rounded-2xl hover:scale-[1.02] transition-all shadow-lg">
                 <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white dusk:fill-black">
@@ -78,7 +80,7 @@ export function AboutView() {
               <a href={socialLinks.discord} target="_blank" rel="noreferrer" className="col-span-2 flex items-center justify-between p-4 bg-[#5865F2]/10 rounded-2xl hover:scale-[1.01] transition-all border border-[#5865F2]/20">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-[#5865F2] text-white flex items-center justify-center"><i className="fab fa-discord" /></div>
-                  <span className="font-bold text-[#5865F2]">Join Discord Community</span>
+                  <span className="font-bold text-[#5865F2]">{t('about.discord')}</span>
                 </div>
                 <i className="fas fa-arrow-right text-[#5865F2] text-sm opacity-50" />
               </a>
@@ -86,13 +88,13 @@ export function AboutView() {
           </div>
 
           <div className="space-y-3">
-            <Divider label="Resources" />
+            <Divider label={t('about.resources')} />
             <a href={socialLinks.coffee} target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 bg-yellow-50 dusk:bg-yellow-900/20 border-2 border-yellow-400 rounded-2xl hover:scale-[1.01] transition-all shadow-lg shadow-yellow-400/20">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-yellow-400 text-yellow-900 flex items-center justify-center text-xl"><i className="fas fa-coffee" /></div>
                 <div className="text-left">
-                  <span className="font-bold text-gray-900 dusk:text-yellow-100 text-lg block">Buy me a coffee</span>
-                  <span className="text-xs text-yellow-600 dusk:text-yellow-200 font-semibold">Support development</span>
+                  <span className="font-bold text-gray-900 dusk:text-yellow-100 text-lg block">{t('about.coffee')}</span>
+                  <span className="text-xs text-yellow-600 dusk:text-yellow-200 font-semibold">{t('about.coffeeHint')}</span>
                 </div>
               </div>
               <i className="fas fa-heart text-red-500 animate-bounce" />
@@ -101,8 +103,8 @@ export function AboutView() {
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-purple-400 text-white flex items-center justify-center text-xl"><i className="fas fa-question" /></div>
                 <div>
-                  <span className="font-bold text-gray-900 dusk:text-purple-100 text-lg block">FAQs</span>
-                  <span className="text-xs text-purple-600 dusk:text-purple-300 font-semibold">Secrets & Safety</span>
+                  <span className="font-bold text-gray-900 dusk:text-purple-100 text-lg block">{t('about.faq')}</span>
+                  <span className="text-xs text-purple-600 dusk:text-purple-300 font-semibold">{t('about.faqHint')}</span>
                 </div>
               </div>
               <i className="fas fa-chevron-right text-purple-400" />
@@ -111,33 +113,33 @@ export function AboutView() {
 
           {isDevUnlocked && (
             <div className="flex flex-col items-center gap-3 mt-8 w-full animate-fade-in">
-              <Divider label="Developer Options" />
+              <Divider label={t('about.devOptions')} />
               <div className="flex flex-col gap-3 w-full p-4 bg-card border border-theme-border rounded-2xl shadow-lg shadow-primary/5">
                 <div className="flex items-center justify-between">
                   <div className="text-left">
-                    <span className="font-bold text-theme-text block">Data Source</span>
-                    <span className="text-xs text-theme-sub">{useRemoteJson ? 'Remote (Config)' : 'Local Bundle'}</span>
+                    <span className="font-bold text-theme-text block">{t('about.dataSource')}</span>
+                    <span className="text-xs text-theme-sub">{useRemoteJson ? t('about.remoteConfig') : t('about.localBundle')}</span>
                   </div>
                   <button onClick={toggleSourceMode} className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${useRemoteJson ? 'bg-primary text-white' : 'bg-theme-element text-theme-sub'}`}>
-                    {useRemoteJson ? 'Remote' : 'Local'}
+                    {useRemoteJson ? t('about.remote') : t('about.local')}
                   </button>
                 </div>
                 <div className="h-px bg-theme-border w-full" />
                 <div className="flex flex-col gap-2 text-left">
                   <div className="flex justify-between items-center">
-                    <span className="font-bold text-theme-text text-sm">GitHub Token (PAT)</span>
-                    <button onClick={() => setIsEditingToken(!isEditingToken)} className="text-xs text-primary font-bold">{isEditingToken ? 'Cancel' : 'Edit'}</button>
+                    <span className="font-bold text-theme-text text-sm">{t('about.githubToken')}</span>
+                    <button onClick={() => setIsEditingToken(!isEditingToken)} className="text-xs text-primary font-bold">{isEditingToken ? t('about.cancel') : t('about.edit')}</button>
                   </div>
-                  <p className="text-[10px] text-theme-sub leading-tight">Bypass rate limits (5000 req/hr vs 60 req/hr).</p>
+                  <p className="text-[10px] text-theme-sub leading-tight">{t('about.tokenHint')}</p>
                   {isEditingToken ? (
                     <div className="flex gap-2 mt-1">
                       <input ref={tokenInputRef} type="password" placeholder="ghp_xxxxxxxxxxxx" className="flex-1 bg-theme-input border border-theme-border rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" onKeyDown={e => { if (e.key === 'Enter') handleTokenSave(tokenInputRef.current?.value ?? ''); }} />
-                      <button className="bg-primary text-white px-3 rounded-lg text-xs font-bold" onClick={() => handleTokenSave(tokenInputRef.current?.value ?? '')}>Save</button>
+                      <button className="bg-primary text-white px-3 rounded-lg text-xs font-bold" onClick={() => handleTokenSave(tokenInputRef.current?.value ?? '')}>{t('about.save')}</button>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
                       <div className="bg-theme-element px-3 py-2 rounded-lg flex-1 flex items-center justify-between">
-                        <span className="text-xs font-mono text-theme-sub">{githubToken ? '••••••••••••••••••••' : 'No token set'}</span>
+                        <span className="text-xs font-mono text-theme-sub">{githubToken ? '••••••••••••••••••••' : t('about.noToken')}</span>
                         {githubToken && <i className="fas fa-check-circle text-green-500 text-xs" />}
                       </div>
                       {githubToken && <button onClick={() => setGithubToken('')} className="w-8 h-8 flex items-center justify-center bg-red-500/10 text-red-500 rounded-lg"><i className="fas fa-trash text-xs" /></button>}
@@ -146,7 +148,7 @@ export function AboutView() {
                 </div>
               </div>
               <button onClick={() => { storage.clear(); window.location.reload(); }} className="px-4 py-2 rounded-xl bg-red-500/10 text-red-500 text-xs font-bold hover:bg-red-500/20 transition-colors flex items-center gap-2">
-                <i className="fas fa-trash-alt" />Wipe Cache & Reset
+                <i className="fas fa-trash-alt" />{t('about.wipeCache')}
               </button>
             </div>
           )}
@@ -156,11 +158,11 @@ export function AboutView() {
               <span className="opacity-60 font-mono">v{CURRENT_STORE_VERSION}</span>
               <span className="w-1 h-1 rounded-full bg-theme-border" />
               <div className={`px-3 py-1 rounded-full border text-xs font-bold flex items-center gap-2 shadow-xs ${useRemoteJson ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dusk:text-emerald-400' : 'bg-amber-500/10 border-amber-500/20 text-amber-600 dusk:text-amber-400'}`}>
-                <span className="uppercase tracking-wider opacity-80">Source:</span>
-                <span>{useRemoteJson ? 'Remote' : 'Local'}</span>
+                <span className="uppercase tracking-wider opacity-80">{t('about.source')}</span>
+                <span>{useRemoteJson ? t('about.remote') : t('about.local')}</span>
               </div>
             </div>
-            <span className="text-xs font-mono text-theme-sub opacity-40">Made with 💜 for Geeks</span>
+            <span className="text-xs font-mono text-theme-sub opacity-40">{t('about.madeWith')}</span>
           </div>
         </div>
       </div>
