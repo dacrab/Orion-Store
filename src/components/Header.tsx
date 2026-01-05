@@ -13,7 +13,7 @@ export function Header() {
   const downloadUrl = config?.storeDownloadUrl;
 
   const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
+    void i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
   };
 
   return (
